@@ -12,4 +12,4 @@ For details see the respective project's documentation.
 - Run `docker-compose up -d`
 - Navigate to [localhost:3000](http://localhost:3000) to access the Metabase UI
 - Send API requests to `POST http://localhost:8000/apps/com.example.yourapp` to store them
-
+- (optional) run `./cron-backup.sh add` to automatically create database backups on a schedule (by default at 22:00 each day)
