@@ -5,15 +5,21 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    restart: always
     volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - ./key.pem:/root/ssl/key.pem
-      - ./cert.pem:/root/ssl/cert.pem
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./certbot/www/:/var/www/certbox/:ro
     networks:
       default:
         ipv4_address: 172.16.200.32
     depends_on:
       - attolytics
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
 
   db:
     image: postgres:16.1-alpine
