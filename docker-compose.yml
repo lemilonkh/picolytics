@@ -2,9 +2,14 @@ version: "3.3"
 services:
   db:
     image: postgres:16.1-alpine
+    container_name: picolytics-db
     restart: always
+    configs:
+      - source: backup_script
+        target: /usr/local/bin/db-backup.sh
     volumes:
       - db-data:${DB_DATA_DIR}
+      - db-backups:${DB_BACKUP_DIR}
     environment:
       - PGDATA=${DB_DATA_DIR}
       - POSTGRES_DB=${DB_NAME}
@@ -65,7 +70,10 @@ networks:
 configs:
   attolytics_config:
     file: ./schema.conf.yaml
+  backup_script:
+    file: ./db-backup.sh
 
 volumes:
-  db-data:
+  db-data: {}
+  db-backups: {}
 
