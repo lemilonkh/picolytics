@@ -3,8 +3,8 @@ upstream attolytics {
 }
 
 server {
-  listen 443 default_server ssl http2;
-  listen [::]:443 ssl http2;
+  listen 443 default_server ssl;
+  listen [::]:443 ssl;
   server_name ${SERVER_NAME};
   ssl_certificate /etc/nginx/ssl/live/${SERVER_NAME}/fullchain.pem;
   ssl_certificate_key /etc/nginx/ssl/live/${SERVER_NAME}/privkey.pem;
