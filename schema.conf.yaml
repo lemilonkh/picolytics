@@ -1,0 +1,26 @@
+tables:
+  events:
+    columns:
+      - name: time
+        type: timestamp
+        indexed: true
+      - name: platform
+        indexed: true
+        required: true
+      - name: version
+        indexed: true
+        required: true
+      - name: event_type
+        indexed: true
+        required: true
+      - name: props
+        type: string
+      - name: value
+        type: f32
+
+apps:
+  com.example.yourapp:
+    secret_key: YOUR_SECRET_HERE
+    # access_control_allow_origin: http://example.com
+    tables:
+      - events
